@@ -9,6 +9,7 @@ from django.views.decorators.cache import never_cache, cache_page
 
 
 def home(request, template):
+    dictionary = {}
     return render_to_response(template, dictionary,
                               context_instance=RequestContext(request))
 
