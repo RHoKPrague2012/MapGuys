@@ -24,8 +24,6 @@ if settings.DEBUG:
 
 #  Lib root urls
 urlpatterns += patterns("",
-    url(r'^accounts/', include("app.registration.urls")),
-    url(r'^accounts/profile/', redirect_to, {"url": settings.LOGIN_URL}),
 )
 
 #  App root urls
