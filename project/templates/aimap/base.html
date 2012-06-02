@@ -1,15 +1,15 @@
 {%extends "base.html" %}
 {%block css%}
 <link rel="stylesheet" type="text/css" href="/static/css/leaflet.css" />
+<!--[if lte IE 8]>
+<link rel="stylesheet" href="/static/css/leaflet.ie.css" />
+<![endif]-->
 {%endblock%}
 {%block js%}
 <script type="text/javascript" src="/static/js/jquery-1.7.2.js"></script>
 <script type="text/javascript" src="/static/js/knockout-2.1.0.debug.js"></script>
 <script type="text/javascript" src="/static/js/leaflet.js"></script>
 <script type="text/javascript" src="/static/js/maphelpers.js"></script>
-<!--[if lte IE 8]>
-<link rel="stylesheet" href="/static/js/leaflet.ie.css" />
-<![endif]-->
 {%endblock%}
 {%block body%}
 {%block content%}
