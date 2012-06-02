@@ -43,6 +43,8 @@ class Person(models.Model):
     country = models.ForeignKey(Country, null=True, blank=True)
     ai_library = models.URLField(null=True, blank=True, max_length=255)
     
+    lat = models.FloatField()
+    lon = models.FloatField()
 
     def save(self):
         self.ascii_first_name = unicode2ascii(self.first_name)
