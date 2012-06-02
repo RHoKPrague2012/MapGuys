@@ -14,11 +14,29 @@
 <script type="text/javascript" src="Scripts/maphelpers.js"></script>
 <body>
     <div id="map" style="height: 400px"></div>
-
+    
 </body>
     <script>
         $(function () {
-            ShowMap();
+            var map = new L.Map('map');
+            InitMap(map);
+            
+            marker1 = {
+                X: 50,
+                Y: 40,
+                link: "detail_view1.html",
+                text: "Pokus",
+                imgLink: "img.jpg"
+            }
+            marker2 = {
+                X: 40,
+                Y: 40,
+                link: "detail_view2.html",
+                text: "Hokus",
+                imgLink: "img.jpg"
+            }
+        
+            DisplayMarkers([marker1, marker2], map);
         });
     </script>
 </html>

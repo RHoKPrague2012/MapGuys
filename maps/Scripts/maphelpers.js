@@ -1,12 +1,10 @@
 ﻿function SetDefautLocation() {
-    var defaultLocation = L.LatLng(0, 0); // geographical point (longitude and latitude)
+    var defaultLocation = new L.LatLng(0, 0); // geographical point (longitude and latitude)
     map.setView(defaultLocation, 5).addLayer(cloudmade);
 };
 
-function ShowMap() {
+function InitMap(map) {
 
-
-    var map = new L.Map('map');
     var cloudmade = new L.TileLayer('http://{s}.tile.cloudmade.com/5c84c84721ef42c88f678b3686b02e92/997/256/{z}/{x}/{y}.png', {
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
         maxZoom: 18
@@ -54,4 +52,16 @@ function ShowMap() {
     }
    
     
+}
+
+function DisplayMarkers(markers, map) {
+
+    $.each(markers, function (index, value) {
+        //console.log(index + ': ' + value);
+        var markerLocation = new L.LatLng(value.X, value.Y);
+        var marker = new L.Marker(markerLocation);
+        map.addLayer(marker);
+        var concatenated = "<b>" + value.text + '</b><br /><a href="' + value.link + '">Detail</a><br /><img src="' + value.imgLink + '" />';
+        marker.bindPopup(concatenated);
+    });
 }
