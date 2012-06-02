@@ -14,32 +14,17 @@
 <script type="text/javascript" src="Scripts/maphelpers.js"></script>
 <body>
     <div id="map" style="height: 500px; width: auto"></div>
-    
+    <img src="fakedata.json" />
+
 </body>
     <script>
         $(function () {
             var map = new L.Map('map');
             InitMap(map);
             
-            marker1 = {
-                X: 50,
-                Y: 40,
-                link: "detail_view1.html",
-                text: "Pokus",
-                imgLink: "img/img.gif"
-            }
-            marker2 = {
-                X: 40,
-                Y: 40,
-                link: "detail_view2.html",
-                text: "Hokus",
-                imgLink: ""
-            }
-
             $.getJSON('fakedata.json', function (data) {
                 DisplayMarkers(data, map);
             });
-        
             
         });
     </script>
