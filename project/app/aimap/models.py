@@ -45,12 +45,14 @@ class Person(models.Model):
     photo = models.URLField(null=True, blank=True, max_length=255)
     description = models.TextField(null=True, blank=True)
     
-       
     lat = models.FloatField()
     lon = models.FloatField()
 
     def get_absolute_url(self):
         return u"/%i"%self.pk
+        
+    def get_json(self):
+        return u'{"X":%f,"Y":%f,"text":"%s","link":"%s","imgLink":"%s"}'%(self.lan, self.lot, self.issue_name, self.get_absolute_url(), self.photo)
 
     def save(self):
         self.ascii_first_name = unicode2ascii(self.first_name)
