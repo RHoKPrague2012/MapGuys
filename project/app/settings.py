@@ -6,6 +6,7 @@ INSTALLED_APPS += (
 
 # Project apps
 INSTALLED_APPS += (
+    "aimap",
 )
 
 # Django settings
