@@ -61,7 +61,10 @@ function DisplayMarkers(markers, map) {
         var markerLocation = new L.LatLng(value.X, value.Y);
         var marker = new L.Marker(markerLocation);
         map.addLayer(marker);
-        var concatenated = "<b>" + value.text + '</b><br /><a href="' + value.link + '">Detail</a><br /><img src="' + value.imgLink + '" />';
+        var concatenated = "<b>" + value.text + '</b><br /><a href="' + value.link + '">Detail</a>';
+        if (value.imgLink !== "") {     //adding an image if there is a link text
+            concatenated = concatenated + '<br /><img src="' + value.imgLink + '" />';
+        }
         marker.bindPopup(concatenated);
     });
 }
