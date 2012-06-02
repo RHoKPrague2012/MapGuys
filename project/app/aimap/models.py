@@ -42,7 +42,10 @@ class Person(models.Model):
     birth = models.DateField(null=True, blank=True, verbose_name=_('Date of birth'))
     country = models.ForeignKey(Country, null=True, blank=True)
     ai_library = models.URLField(null=True, blank=True, max_length=255)
+    photo = models.URLField(null=True, blank=True, max_length=255)
+    description = models.TextField(null=True, blank=True)
     
+       
     lat = models.FloatField()
     lon = models.FloatField()
 
