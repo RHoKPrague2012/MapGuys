@@ -1,0 +1,8 @@
+*.py[co]
+.*.swp
+*~
+*.db
+db/*
+*.log
+!.empty
+pylint.cfg
