@@ -1,4 +1,4 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 
 /* For post-2010 reports & ai@50 */
 
@@ -759,7 +759,7 @@ body.node-type-ai50-campaign-general #footer ul li a.active{
   width: 480px;
 }
 
-/* height for 50 */,
+/* height for 50 */
 .section-50 #footer-base .footer-split{
   height: 90px; 
   width: 480px;

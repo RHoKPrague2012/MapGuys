@@ -57,7 +57,7 @@ function InitMap(map) {
 }
 
 function DisplayMarkers(markers, map) {
-
+    var popup
     $.each(markers, function (index, value) {
         //console.log(index + ': ' + value);
         var markerLocation = new L.LatLng(value.X, value.Y);
@@ -67,6 +67,8 @@ function DisplayMarkers(markers, map) {
         if (value.imgLink !== "") {     //adding an image if there is a link text
             concatenated = concatenated + '<br /><img src="' + value.imgLink + '" />';
         }
-        marker.bindPopup(concatenated);
+        popup = marker.bindPopup(concatenated);
     });
+    popup.openPopup();
+    
 }
