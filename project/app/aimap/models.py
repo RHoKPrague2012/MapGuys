@@ -52,7 +52,7 @@ class Person(models.Model):
         return u"/%i"%self.pk
         
     def get_json(self):
-        return u'{"X":%f,"Y":%f,"text":"%s","link":"%s","imgLink":"%s"}'%(self.lan, self.lot, self.issue_name, self.get_absolute_url(), self.photo)
+        return u'{"X":%f,"Y":%f,"text":"%s","link":"%s","imgLink":"%s"}'%(self.lat, self.lon, self.issue_name, self.get_absolute_url(), self.photo)
 
     def save(self):
         self.ascii_first_name = unicode2ascii(self.first_name)
