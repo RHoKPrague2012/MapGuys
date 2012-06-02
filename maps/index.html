@@ -35,8 +35,12 @@
                 text: "Hokus",
                 imgLink: ""
             }
+
+            $.getJSON('fakedata.json', function (data) {
+                DisplayMarkers(data, map);
+            });
         
-            DisplayMarkers([marker1, marker2], map);
+            
         });
     </script>
 </html>
