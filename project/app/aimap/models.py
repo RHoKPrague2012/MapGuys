@@ -46,6 +46,9 @@ class Person(models.Model):
     lat = models.FloatField()
     lon = models.FloatField()
 
+    def get_absolute_url(self):
+        return u"/%i"%self.pk
+
     def save(self):
         self.ascii_first_name = unicode2ascii(self.first_name)
         self.ascii_last_name = unicode2ascii(self.last_name)
