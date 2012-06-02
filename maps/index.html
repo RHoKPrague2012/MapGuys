@@ -1,9 +1,46 @@
-﻿<!DOCTYPE html>
+﻿﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title></title>
+    <meta charset="utf-8">
+    <title>Mikroaktivismus</title>
+    <link rel="stylesheet" type="text/css" href="Leaflet/dist/leaflet.css" />
+	<!--[if lte IE 8]>
+    <link rel="stylesheet" href="Leaflet/dist/leaflet.ie.css" />
+	<![endif]-->
 </head>
+<script type="text/javascript" src="Scripts/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="Scripts/knockout-2.1.0.debug.js"></script>
+<script type="text/javascript" src="Leaflet/dist/leaflet.js"></script>
+<script type="text/javascript" src="Scripts/maphelpers.js"></script>
 <body>
-
+    <div id="map" style="height: 500px; width: auto"></div>
+    
 </body>
+    <script>
+        $(function () {
+            var map = new L.Map('map');
+            InitMap(map);
+            
+            marker1 = {
+                X: 50,
+                Y: 40,
+                link: "detail_view1.html",
+                text: "Pokus",
+                imgLink: "img/img.gif"
+            }
+            marker2 = {
+                X: 40,
+                Y: 40,
+                link: "detail_view2.html",
+                text: "Hokus",
+                imgLink: ""
+            }
+
+            $.getJSON('fakedata.json', function (data) {
+                DisplayMarkers(data, map);
+            });
+        
+            
+        });
+    </script>
 </html>
