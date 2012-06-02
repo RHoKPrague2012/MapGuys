@@ -28,5 +28,5 @@ urlpatterns += patterns("",
 
 #  App root urls
 urlpatterns += patterns('',
-#    url(r'^', include("app.ssm.urls")),
+    url(r'^', include("app.aimap.urls")),
 )
