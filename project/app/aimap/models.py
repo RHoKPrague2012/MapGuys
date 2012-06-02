@@ -34,6 +34,7 @@ class Person(models.Model):
     issue_name = models.CharField(max_length=255)
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
+    ascii_issue_name = models.CharField(blank=True, max_length=255)
     ascii_first_name = models.CharField(blank=True, max_length=255)
     ascii_last_name = models.CharField(blank=True, max_length=255)
     sex = models.IntegerField(choices=SEX_CHOICES)
@@ -55,6 +56,7 @@ class Person(models.Model):
         return u'{"X":%f,"Y":%f,"text":"%s","link":"%s","imgLink":"%s"}'%(self.lat, self.lon, self.issue_name, self.get_absolute_url(), self.photo)
 
     def save(self):
+        self.ascii_issue_name = unicode2ascii(self.issue_name)
         self.ascii_first_name = unicode2ascii(self.first_name)
         self.ascii_last_name = unicode2ascii(self.last_name)
         super(Person, self).save()
