@@ -2,7 +2,7 @@
 .*.swp
 *~
 *.db
-db/*
+project/db/*
 *.log
 !.empty
 pylint.cfg
