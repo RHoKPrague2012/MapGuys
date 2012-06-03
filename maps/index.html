@@ -33,13 +33,12 @@
             <div class="panel-2col-stacked-1sidebar clear-block panel-display" >
                 <div id="map" style="height: 500px; width: auto"></div>
             </div>
-            <div id="detail-view">
+            <div id="detail-view" class="hidden">
 
 
             </div>
         </div>
-        <button onclick="Animation()">Detail</button>
-         
+                
         <br class="panel-clearer" />
 
         <div id="footer-wrapper">
@@ -66,11 +65,15 @@
 </body>
     <script>
         var map = new L.Map('map');
-        function Animation() {
+        function loadAndShowDetail(id) {
 
-            $("#map").animate({ width: "300px" }, { duration: 250, queue: false });
+            $("#map").animate({ width: "370px" }, { duration: 250, queue: false });
 
             $("#map").animate({ height: "400px" }, { duration: 250, queue: false });
+
+            $.getJSON('fakedata_detail.json', function (detail) {
+                DisplayMarkers(data, map);
+            });
             map.setView(new L.LatLng(50, 40), 11);    //TODO: exchange (50,40) with the real coordinates
         }
         $(function () {
