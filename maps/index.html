@@ -4,6 +4,11 @@
     <meta charset="utf-8">
     <title>Mikroaktivismus</title>
     <link rel="stylesheet" type="text/css" href="Leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" type="text/css" href="Honza/Amnesty%20InternationalWeb/css/amnesty_news.css" />
+    <link rel="stylesheet" type="text/css" href="Honza/Amnesty%20InternationalWeb/css/overflow-styles.css" />
+    <link rel="stylesheet" type="text/css" href="Honza/Amnesty%20InternationalWeb/css/underflow-styles.css" />
+    <link rel="stylesheet" type="text/css" href="Honza/Amnesty%20InternationalWeb/css/views.css" />
+    <link rel="stylesheet" type="text/css" href="Honza/Amnesty%20InternationalWeb/css/css_6bbf2d885bf35c40234557246e267754.css" />
 	<!--[if lte IE 8]>
     <link rel="stylesheet" href="Leaflet/dist/leaflet.ie.css" />
 	<![endif]-->
@@ -12,13 +17,64 @@
 <script type="text/javascript" src="Scripts/knockout-2.1.0.debug.js"></script>
 <script type="text/javascript" src="Leaflet/dist/leaflet.js"></script>
 <script type="text/javascript" src="Scripts/maphelpers.js"></script>
-<body>
-    <div id="map" style="height: 500px; width: auto"></div>
-    
+<body class="front not-logged-in no-sidebars panel-layout-twocol_stacked_1sidebar ltr en">
+    <div id="page" class="front not-logged-in no-sidebars panel-layout-twocol_stacked_1sidebar ltr en">
+        <div id="header">
+            <div id="header-top">
+                <div id="secondary" class="clear-block">
+                </div>
+                <div id="logo" class="logo-en">
+                    <a href="/en" title="Amnesty International-Home"><span>Logo</span></a>
+                </div>
+            </div>
+        </div>
+        <div id="container" class="clear-block">
+        
+            <div class="panel-2col-stacked-1sidebar clear-block panel-display" >
+                <div id="map" style="height: 500px; width: auto"></div>
+            </div>
+            <div id="detail-view">
+
+
+            </div>
+        </div>
+        <button onclick="Animation()">Detail</button>
+         
+        <br class="panel-clearer" />
+
+        <div id="footer-wrapper">
+
+	      <div id="footer">
+		    <div id="footer-copyright">
+			    &copy; 2012 Amnesty International		</div>		
+                <ul class="menu">
+                    <li class="leaf first"><a href="/en/50" title=""><span class="menu-arrow">›</span> Amnesty International at 50</a></li>
+                    <li class="leaf"><a href="/en/annual-report/2012" title=""><span class="menu-arrow">›</span> Annual Report</a></li>
+                    <li class="leaf"><a href="http://shop.amnesty.org" title=""><span class="menu-arrow">›</span> <span class="tab">Online shop</span></a></li>
+                    <li class="leaf"><a href="/en/privacy-policy" title="Privacy Policy for the Amnesty International Website"><span class="menu-arrow">›</span> Privacy Policy</a></li>
+                    <li class="leaf"><a href="/en/cookies-statement" title=""><span class="menu-arrow">›</span> Cookies</a></li>
+                    <li class="leaf"><a href="/en/accessibility" title="Accessibility on the Amnesty International website"><span class="menu-arrow">›</span> Accessibility</a></li>
+                    <li class="collapsed"><a href="/en/jobs" title="Jobs"><span class="menu-arrow">›</span> Jobs</a></li>
+                    <li class="leaf"><a href="/en/contact"><span class="menu-arrow">›</span> Contact us</a></li>
+                    <li class="leaf"><a href="/en/worldwide-sites"><span class="menu-arrow">›</span> Worldwide sites</a></li>
+                    <li class="leaf last"><a href="/en/site_map" title="Display a site map with RSS feeds."><span class="menu-arrow">›</span> Site map</a></li>
+                </ul>      
+
+	        </div> <!-- /footer -->
+        </div> <!-- /footer-wrapper -->
+    </div>
 </body>
     <script>
+        var map = new L.Map('map');
+        function Animation() {
+
+            $("#map").animate({ width: "300px" }, { duration: 250, queue: false });
+
+            $("#map").animate({ height: "400px" }, { duration: 250, queue: false });
+            map.setView(new L.LatLng(50, 40), 11);    //TODO: exchange (50,40) with the real coordinates
+        }
         $(function () {
-            var map = new L.Map('map');
+            
             InitMap(map);
             
             marker1 = {
@@ -28,13 +84,6 @@
                 text: "Pokus",
                 imgLink: "img/img.gif"
             }
-            marker2 = {
-                X: 40,
-                Y: 40,
-                link: "detail_view2.html",
-                text: "Hokus",
-                imgLink: ""
-            }
 
             $.getJSON('fakedata.json', function (data) {
                 DisplayMarkers(data, map);
@@ -42,5 +91,7 @@
         
             
         });
+
+       
     </script>
 </html>
