@@ -81,14 +81,20 @@
                 map.removeLayer(allMarkers);
                 DisplayMarkers([data.marker], map);
                 var location = new L.LatLng(data.marker.X, data.marker.Y); // geographical point (longitude and latitude)
-                map.invalidateSize();
-                map.setView(location, 4);
+                
+                map.setView(location, 8);
+                map.panBy({x:50,y:0});
                 $("#detail-view").show();
             });
 
             $("#map").animate({ width: "370px" }, { duration: 350, queue: false });
 
-            $("#map").animate({ height: "400px" }, { duration: 350, queue: false });
+            $("#map").animate({ height: "400px" }, {
+                duration: 350, queue: false, complete: function () {
+                    console.log("Invalidating map size");
+                    map.invalidateSize();
+                }
+            });
             
             
             
@@ -100,8 +106,12 @@
             map.addLayer(allMarkers);
             $("#map").animate({ height: mapSize[0] }, { duration: 350, queue: false });
             
-            $("#map").animate({ width: mapSize[1] }, { duration: 350, queue: false });
-            map.invalidateSize();
+            $("#map").animate({ width: mapSize[1] }, {
+                duration: 350, queue: false, complete: function () {
+                    console.log("Invalidating map size");
+                    map.invalidateSize();
+                }
+            });
         }
     </script>
 </html>
