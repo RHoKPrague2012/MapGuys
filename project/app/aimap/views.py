@@ -15,5 +15,6 @@ def home(request, template):
 
 
 def detail(request, pk, template):
+    dictionary = {}
     return render_to_response(template, dictionary,
                               context_instance=RequestContext(request))

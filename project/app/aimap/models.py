@@ -51,6 +51,15 @@ class Person(models.Model):
 
     def get_absolute_url(self):
         return u"/%i"%self.pk
+    
+    def __unicode__(self):
+        return u"%s %s" % (self.last_name, self.first_name)
+
+    def get_full_name(self):
+        return unicode(self)
+    
+    def get_url_key(self):
+        return u"%s-%s-%i"%(self.ascii_issue_name, self.get_full_name(), self.pk).replace(" ", "-")
         
     def get_json(self):
         return u'{"X":%f,"Y":%f,"text":"%s","link":"%s","imgLink":"%s"}'%(self.lat, self.lon, self.issue_name, self.get_absolute_url(), self.photo)
@@ -61,11 +70,6 @@ class Person(models.Model):
         self.ascii_last_name = unicode2ascii(self.last_name)
         super(Person, self).save()
 
-    def __unicode__(self):
-        return u"%s %s" % (self.last_name, self.first_name)
-
-    def get_full_name(self):
-        return unicode(self)
 
     class Meta:
         verbose_name = _('Person')
