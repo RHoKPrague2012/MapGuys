@@ -1,9 +1,9 @@
 {%extends "aimap/base.html" %}
 {%block content%}
 <div id="map" style="height: 500px; width: auto; "></div>
-<div id="detail-view" style="display:none; float:right; width:400px">
-                <div id="detail"></div>
+<div id="detail-view" style="display:none; float:right; width:500px">
                 <button id="hideDetail" onClick="HideDetail()">Hide event detail</button>
+                <div id="detail"></div>
             </div>
             <script>
         map = new L.Map('map');
@@ -42,10 +42,11 @@
                 }
                 concatenated = concatenated + "</div>"
                 $('#detail').replaceWith(concatenated);
+                $('#map').css("float","left");
                 history.pushState(data, data.full_name, data.pk);
             });
 
-            $("#map").animate({ width: "370px" }, { duration: 350, queue: false });
+            $("#map").animate({ width: "450px" }, { duration: 350, queue: false });
 
             $("#map").animate({ height: "400px" }, {
                 duration: 350, queue: false, complete: function () {
@@ -71,6 +72,7 @@
                     map.invalidateSize();
                     map.setZoom(3);
                     $('#detail').replaceWith('<div id="detail"></div>');
+                    $('#map').css("float","none");
                     window.history.back();
                     //window.history.popState();
                 }
