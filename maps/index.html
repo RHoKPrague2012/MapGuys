@@ -95,12 +95,12 @@
         }
 
         function HideDetail() {
-
+            map.removeLayer(currentDetail.marker);
             $("#detail-view").hide();
             map.addLayer(allMarkers);
-            $("#map").animate({ width: mapSize[0] }, { duration: 350, queue: false });
+            $("#map").animate({ height: mapSize[0] }, { duration: 350, queue: false });
             
-            $("#map").animate({ height: mapSize[1] }, { duration: 350, queue: false });
+            $("#map").animate({ width: mapSize[1] }, { duration: 350, queue: false });
             map.invalidateSize();
         }
     </script>
