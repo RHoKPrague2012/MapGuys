@@ -17,6 +17,7 @@
 <script type="text/javascript" src="Scripts/knockout-2.1.0.debug.js"></script>
 <script type="text/javascript" src="Leaflet/dist/leaflet.js"></script>
 <script type="text/javascript" src="Scripts/maphelpers.js"></script>
+<<<<<<< HEAD
 <body class="front not-logged-in no-sidebars panel-layout-twocol_stacked_1sidebar ltr en">
     <div id="page" class="front not-logged-in no-sidebars panel-layout-twocol_stacked_1sidebar ltr en">
         <div id="header">
@@ -62,6 +63,12 @@
 	        </div> <!-- /footer -->
         </div> <!-- /footer-wrapper -->
     </div>
+=======
+<body>
+    <div id="map" style="height: 500px; width: auto"></div>
+    <img src="fakedata.json" />
+
+>>>>>>> fcfe8362d4aaaed24f91c5c2d8adc2161746674f
 </body>
     <script>
         var map = new L.Map('map');
@@ -80,11 +87,13 @@
             
             InitMap(map);
             
+<<<<<<< HEAD
            
+=======
+>>>>>>> fcfe8362d4aaaed24f91c5c2d8adc2161746674f
             $.getJSON('fakedata.json', function (data) {
                 DisplayMarkers(data, map);
             });
-        
             
         });
 

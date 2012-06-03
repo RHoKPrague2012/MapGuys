@@ -8,10 +8,11 @@ margin: 20px auto;
 }
 
 #header {
+padding-top:10px;
 background-image:url('/static/img/header-logo-en.png');
 background-repeat:no-repeat;
 background-color: #ffff00;
-height: 100px;
+height: 90px;
 margin-bottom: 10px;
 overflow: auto;
 }
