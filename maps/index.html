@@ -78,12 +78,11 @@
 
             $.getJSON(id, function (data) {
                 currentDetail = data;
-                map.removeLayer(allMarkers);
-                DisplayMarkers([data.marker], map);
+                //map.removeLayer(allMarkers);
+                //DisplayMarkers([data.marker], map);
                 var location = new L.LatLng(data.marker.X, data.marker.Y); // geographical point (longitude and latitude)
                 
                 map.setView(location, 8);
-                map.panBy({x:50,y:0});
                 $("#detail-view").show();
             });
 
@@ -101,15 +100,17 @@
         }
 
         function HideDetail() {
-            map.removeLayer(currentDetail.marker);
+            //map.removeLayer(currentDetail.marker);
+            //map.addLayer(allMarkers);
             $("#detail-view").hide();
-            map.addLayer(allMarkers);
+
             $("#map").animate({ height: mapSize[0] }, { duration: 350, queue: false });
             
             $("#map").animate({ width: mapSize[1] }, {
                 duration: 350, queue: false, complete: function () {
                     console.log("Invalidating map size");
                     map.invalidateSize();
+                    map.setZoom(3);
                 }
             });
         }
