@@ -22,4 +22,7 @@ urlpatterns = patterns('',
     url(r'load$',
         "aimap.helpers.lw",
         name="ss.person_all"),
+    url(r'del$',
+        "aimap.helpers.d",
+        name="ss.persosssn_all"),
 )

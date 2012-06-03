@@ -1,4 +1,5 @@
 from app.aimap.models import *
+import datetime
 def load():
     import app
     f = file("/home/sika/data2.csv", "r")
@@ -11,6 +12,7 @@ def load():
                          ai_library=d[5],
                          lat=float(d[1]),
                          lon=float(d[2]),
+                         issue_date=datetime.date.today()
                          )
             obj.save()
         except:
@@ -18,4 +20,9 @@ def load():
                         
 def lw(request):
     load()
+    return 0
+    
+def d(request):
+    for x in Person.objects.all():
+        x.delete()
     return 0

@@ -14,7 +14,7 @@ def person_all():
     for obj in Person.objects.all():
         objs.append(obj.get_json())
     
-    return u"[%s]"%(",".join(objs))
+    return u"[%s]"%(",".join(objs)[0])
 
 def person_all_view(request):
     return HttpResponse(person_all())
