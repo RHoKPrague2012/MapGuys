@@ -1,13 +1,19 @@
 from app.aimap.models import *
 import datetime
 import time
+import settings
+import os
+
+
 def load():
     import app
     i = 0
-    f = file("/home/sika/data2.csv", "r")
+    path = os.path.normpath(os.path.join(settings.PROJECT_ROOT, "..", "data2.csv"))
+    print path
+    f = file(path, "r")
     for line in f.read().split("\n"):
         i += 1
-        if i == 10: break
+        #if i == 10: break
         try:
             d = line.split(";")
             a = d[6].split(" ")
@@ -22,7 +28,7 @@ def load():
                          issue_date=dd
                          )
             obj.save()
-        except ValueError:
+        except :#ValueError:
             pass
                         
 def lw(request):
