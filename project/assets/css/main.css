@@ -8,14 +8,23 @@ margin: 20px auto;
 }
 
 #header {
+background-image:url('/static/img/header-logo-en.png');
+background-repeat:no-repeat;
 background-color: #ffff00;
+height: 100px;
 margin-bottom: 10px;
+overflow: auto;
 }
 
 #content {
 overflow: auto;
 background-color: #fff;
 }
+
+#right-head {
+float:right;
+}
+
 
 #footer {
 background-color: #ffff00;
