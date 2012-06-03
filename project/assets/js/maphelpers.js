@@ -57,16 +57,18 @@ function InitMap(map) {
 }
 
 function DisplayMarkers(markers, map) {
-
+    var popup
     $.each(markers, function (index, value) {
         //console.log(index + ': ' + value);
         var markerLocation = new L.LatLng(value.X, value.Y);
         var marker = new L.Marker(markerLocation);
         map.addLayer(marker);
-        var concatenated = "<b>" + value.text + '</b><br /><a href="' + value.link + '">Detail</a>';
+        var concatenated = "<b>" + value.text + '</b><br /><a href="' + value.detailJson + '">Detail</a>';
         if (value.imgLink !== "") {     //adding an image if there is a link text
             concatenated = concatenated + '<br /><img src="' + value.imgLink + '" />';
         }
-        marker.bindPopup(concatenated);
+        popup = marker.bindPopup(concatenated);
     });
+    popup.openPopup();
+    
 }

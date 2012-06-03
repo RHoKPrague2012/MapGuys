@@ -66,7 +66,7 @@ class Person(models.Model):
         return u"%s-%s-%i"%(self.ascii_issue_name, self.get_full_name(), self.pk).replace(" ", "-")
         
     def get_json(self):
-        return u'{"X":%f,"Y":%f,"text":"%s","link":"%s","imgLink":"%s"}'%(self.lat, self.lon, self.issue_name, self.get_absolute_url(), self.photo)
+        return u'{"X":%f,"Y":%f,"text":"%s","detailJson":"%s","imgLink":"%s"}'%(self.lat, self.lon, self.issue_name, self.get_absolute_url(), self.photo)
 
     def save(self):
         self.ascii_issue_name = unicode2ascii(self.issue_name)
