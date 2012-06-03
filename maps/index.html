@@ -84,6 +84,8 @@
                 
                 map.setView(location, 8);
                 $("#detail-view").show();
+
+                history.pushState(data, data.full_name, id);
             });
 
             $("#map").animate({ width: "370px" }, { duration: 350, queue: false });
@@ -111,6 +113,8 @@
                     console.log("Invalidating map size");
                     map.invalidateSize();
                     map.setZoom(3);
+                    window.history.back();
+                    //window.history.popState();
                 }
             });
         }
