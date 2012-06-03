@@ -34,7 +34,7 @@
                 <div id="map" style="height: 500px; width: auto"></div>
             </div>
             <div id="detail-view" style="display:none;">
-                Pokus
+                <div id="detail"></div>
                 <button id="hideDetail" onClick="HideDetail()">Back to all</button>
             </div>
         </div>
@@ -84,7 +84,20 @@
                 
                 map.setView(location, 8);
                 $("#detail-view").show();
+                var concatenated =
+                    '<div id="detail"><h1>' + data.full_name + '</h2><br />' +
+                    '<h3> Date of the event: ' + data.issue_date + ' </h3> <br />'+
+                    '<h5> Added: ' +             data.birth + '</h5> <br />'+
+                    '<h2> Country: ' +           data.country + '</h3> <br />'+
+                    '<p>' +                      data.description + '</p> <br />';
 
+
+                    
+                if (data.photo !== "") {     //adding an image if there is a link text
+                    concatenated = concatenated + '<img src="' + data.photo + '" />';
+                }
+                concatenated = concatenated + "</div>"
+                $('#detail').replaceWith(concatenated);
                 history.pushState(data, data.full_name, id);
             });
 
@@ -113,6 +126,7 @@
                     console.log("Invalidating map size");
                     map.invalidateSize();
                     map.setZoom(3);
+                    $('#detail').replaceWith('<div id="detail"></div>');
                     window.history.back();
                     //window.history.popState();
                 }
