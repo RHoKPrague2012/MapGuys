@@ -1,4 +1,5 @@
-﻿
+﻿allMarkers = {};
+
 function InitMap(map) {
 
     var cloudmade = new L.TileLayer('http://{s}.tile.cloudmade.com/5c84c84721ef42c88f678b3686b02e92/997/256/{z}/{x}/{y}.png', {
@@ -50,22 +51,30 @@ function InitMap(map) {
             );
 
     };
-    
+
+    $.getJSON('/json/person_all.json', function (data) {        //loads and displays markers
+        allMarkers = DisplayMarkers(data, map);
+    });
 }
 
 function DisplayMarkers(markers, map) {
+    var issuesLayer = new L.LayerGroup();
     var popup
     $.each(markers, function (index, value) {
         //console.log(index + ': ' + value);
         var markerLocation = new L.LatLng(value.X, value.Y);
         var marker = new L.Marker(markerLocation);
-        map.addLayer(marker);
-        var concatenated = "<b>" + value.text + '</b><br /><a href="' + value.detailJson + '">Detail</a>';
+        
+        issuesLayer.addLayer(marker);
+
+        var concatenated = "<b>" + value.text + '</b><br /><button id="' + value.detailJson + '" onClick="loadAndShowDetail(this.id)">See detail</button>';
         if (value.imgLink !== "") {     //adding an image if there is a link text
             concatenated = concatenated + '<br /><img src="' + value.imgLink + '" />';
         }
         popup = marker.bindPopup(concatenated);
     });
+    map.addLayer(issuesLayer);
     popup.openPopup();
+    return issuesLayer;
     
 }

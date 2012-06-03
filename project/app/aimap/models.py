@@ -45,16 +45,21 @@ class Person(models.Model):
     
     def get_url_key(self):
         return u"%s-%s-%i"%(self.ascii_issue_name, self.get_full_name(), self.pk).replace(" ", "-")
+
         
     def get_json(self):
         if self.photo:
             photo = self.photo
         else:
             photo = ""
-        return u'{"X":%f,"Y":%f,"text":"%s","detailJson":"%s","imgLink":"%s"}'%(self.lat, self.lon, self.issue_name, self.get_absolute_url(), photo)
+        return u'{"X":%f,"Y":%f,"text":"%s","detailJson":"%s","imgLink":"%s"}'%(self.lat, self.lon, self.issue_name, u"/json/person_%i.json"%self.pk, photo)
 
     def get_detail_json(self):
-        return '{"issue_date":"%s","pub_date":"%s","country":"%s","photo":"%s","description":"%s"}'%(self.issue_date, self.pub_date, self.country, self.photo, self.description)
+        if self.photo:
+            photo = self.photo
+        else:
+            photo = ""
+        return '{"marker":%s, "pk":"%i", "issue_name":"%s", "issue_date":"%s","pub_date":"%s","country":"%s","photo":"%s","description":"%s"}'%(self.get_json(), self.pk, self.issue_name, self.issue_date, self.pub_date, self.country, photo, self.description)
 
     def save(self):
         #self.ascii_issue_name = unicode2ascii(self.issue_name)
