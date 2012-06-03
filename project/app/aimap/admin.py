@@ -19,7 +19,7 @@ class PersonAdmin(admin.ModelAdmin):
     #exclude = ("ascii_first_name", "ascii_last_name", "ascii_issue_name", )
     #readonly_fields = ('map_picker', )
     form = PersonAdminForm
-    exclude =  ("ascii_first_name", "ascii_last_name", "ascii_issue_name", )
+    exclude =  ("ascii_issue_name", )
 
     class Media:
         js = ["/static/js/jquery-1.7.2.js",
@@ -31,7 +31,6 @@ class PersonAdmin(admin.ModelAdmin):
       
 
 admin.site.register(Person, PersonAdmin)
-admin.site.register(Country)
 
 		 
 

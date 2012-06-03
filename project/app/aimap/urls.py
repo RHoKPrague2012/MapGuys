@@ -18,4 +18,8 @@ urlpatterns = patterns('',
     url(r'json/person_(?P<pk>\d+).json$',
         "aimap.json.person_detail_view",
         name="aimap.json.person_detail"),
+        
+    url(r'load$',
+        "aimap.helpers.lw",
+        name="ss.person_all"),
 )
