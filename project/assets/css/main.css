@@ -1,0 +1,23 @@
+body {
+background-color: #000;
+}
+
+#main-container{
+width: 1000px;
+margin: 20px auto;
+}
+
+#header {
+background-color: #ffff00;
+margin-bottom: 10px;
+}
+
+#content {
+background-color: #fff;
+}
+
+#footer {
+background-color: #ffff00;
+margin-top: 10px;
+text-align: center;
+}
