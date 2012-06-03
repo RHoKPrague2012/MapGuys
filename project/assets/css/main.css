@@ -13,6 +13,7 @@ margin-bottom: 10px;
 }
 
 #content {
+overflow: auto;
 background-color: #fff;
 }
 
