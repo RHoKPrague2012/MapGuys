@@ -10,6 +10,8 @@ function InitMap(map) {
         var defaultLocation = new L.LatLng(0, 0); // geographical point (longitude and latitude)
         map.setView(defaultLocation, 2).addLayer(cloudmade);
     };
+    
+    	SetDefautLocation();
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
@@ -47,12 +49,7 @@ function InitMap(map) {
             }
             );
 
-    }
-    else // finish the error checking if the client is not compliant with the spec
-    {
-        SetDefautLocation();
-    }
-   
+    };
     
 }
 
