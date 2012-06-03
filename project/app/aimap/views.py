@@ -8,6 +8,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.cache import never_cache, cache_page
 
 
+from models import Person
+
 def home(request, template):
     dictionary = {}
     return render_to_response(template, dictionary,
@@ -15,6 +17,7 @@ def home(request, template):
 
 
 def detail(request, pk, template):
-    dictionary = {}
+    person = Person.objects.get(pk=pk)
+    dictionary = {"person": person}
     return render_to_response(template, dictionary,
                               context_instance=RequestContext(request))
