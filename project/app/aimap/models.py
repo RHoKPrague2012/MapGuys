@@ -46,8 +46,12 @@ class Person(models.Model):
     photo = models.URLField(null=True, blank=True, max_length=255)
     description = models.TextField(null=True, blank=True)
     
+    map_picker = models.CharField(max_length=255, null=True, blank=True)
     lat = models.FloatField()
     lon = models.FloatField()
+
+    def admin_map_picker(self):
+        return "<a href='http://google.com'>HELLO</a>"
 
     def get_absolute_url(self):
         return u"/%i"%self.pk
