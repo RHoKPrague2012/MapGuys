@@ -77,14 +77,7 @@
             
             InitMap(map);
             
-            marker1 = {
-                X: 50,
-                Y: 40,
-                link: "detail_view1.html",
-                text: "Pokus",
-                imgLink: "img/img.gif"
-            }
-
+           
             $.getJSON('fakedata.json', function (data) {
                 DisplayMarkers(data, map);
             });
