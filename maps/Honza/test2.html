@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>test</title>
+
+<link href="../Leaflet/dist/leaflet.css" rel="stylesheet" />
+<!--[if lte IE 8]>
+    <link rel="stylesheet" href="../Leaflet/dist/leaflet.ie.css" />
+<![endif]-->
+
+<script src="../Leaflet/dist/leaflet.js"></script>
+
+</head>
+<body class="container" id="view_profile">
+	<header id="masthead" class="sixteen columns clearfix">
+		<h1 class="eleven columns alpha">
+			<a href="/"><span class="word1">Django</span> <span class="word2">P<span class="char2">e</span>ople</span></a>
+		</h1>
+		
+		<div class="five columns omega" id="user_info">
+			<p>
+				<a href="/browse/">Browse members</a>
+				<a href="/login/twitter/" class="button" id="twitter_account"><span></span>Your Account</a>
+			</p>
+		</div>
+		
+	</header>
+
+	<div class="sixteen columns clearfix" id="content">
+		
+	<section class="eight columns alpha clearfix">
+		<header class="clearfix">
+			<div class="one columns alpha">
+				<img src="http://img.tweetimag.es/i/mgom9262_b" width="73" height="73">
+			</div>
+			<hgroup class="six columns omega">
+				<h2>mgom9262</h2>
+				
+			</hgroup>
+		</header>
+		<div class="eight columns alpha clearfix">
+			
+			<button class="show_message_form">Contact me</button>
+			
+			<a href="http://djangopeople.me/k7jl8/">short url</a>
+		</div>
+
+		
+
+		
+
+		
+
+		
+
+		<section id="social" class="eight columns alpha omega clearfix">
+			<h4 class="two columns alpha">Social</h4>
+			<ul class="six columns omega clearfix inline-list">
+				<li><a href="http://twitter.com/mgom9262">Twitter</a></li>
+			
+			
+			
+			
+			
+			
+			</ul>
+		</section>
+
+		
+			<section id="message" style="display:none;" class="clearfix">
+				<h3>Send me a message!</h3>
+				<form action="/profile/send_message/mgom9262/" method="POST">
+					<div style='display:none'><input type='hidden' name='csrfmiddlewaretoken' value='5b9d80f35780c9f479ce04d1f1239cff' /></div>
+					
+
+
+
+	
+		<p id="name_fieldset">
+	
+	<label for="id_name">
+		
+			<span class="req">*</span>
+		
+		Name
+		
+	</label>
+
+	
+
+	<input type="text" name="name" required id="id_name" class="text">
+
+	</p>
+
+
+	
+		<p id="email_fieldset">
+	
+	<label for="id_email">
+		
+			<span class="req">*</span>
+		
+		Email
+		
+	</label>
+
+	
+
+	<input type="email" name="email" required id="id_email" class="text">
+
+	</p>
+
+
+	
+		<p id="message_fieldset">
+	
+	<label for="id_message">
+		
+			<span class="req">*</span>
+		
+		Message
+		
+	</label>
+
+	
+
+	<textarea name="message" required rows="4" id="id_message" cols="40"></textarea>
+
+	</p>
+
+
+
+	<input type="hidden" name="user_id" value="418" required id="id_user_id">
+
+
+
+
+					<div style="display: none;">
+    <label>leave this field blank to prove your humanity
+        <input type="text" name="winnie_the_pooh" value="" />
+    </label>
+</div>
+
+					<button class="positive span-2 primary"><span class="icon check"></span>Send</button>
+					<button class="span-2 negative"><span class="icon cross"></span>Cancel</button>
+					<input type="submit" style="display:none">
+				</form>
+			</section>
+		
+	</section>
+
+	<section class="eight columns omega">
+		<section id="map_holder">
+			<div id="geo_map">
+				<div id="geo_wrapper"
+					data-latitude="45.88824081"
+					data-longitude="-1.19377702"></div>
+			</div>
+		</section>
+		
+
+	</section>
+
+	</div>
+
+	<footer class="sixteen columns clearfix">
+		<p class="twelve columns alpha">&copy; <a href="http://brack3t.com">Brack3t</a>. All rights reserved. <a href="/privacy/">Privacy</a></p>
+	</footer>
+
+	<script>MEDIA_URL="http://static.djangopeople.me/";</script>
+	<script src="http://static.djangopeople.me/js/lib/yepnope.1.0.1-min.js"></script>
+	<script src="http://static.djangopeople.me/js/loader.js"></script>
+
+	
+	
+<script src="http://static.djangopeople.me/js/view_profile_loader.js"></script>
+
+	
+	
+    <script type="text/javascript">
+    var clicky = { log: function(){ return; }, goal: function(){ return; }};
+    var clicky_site_id = 66421111;
+    var clicky_custom = {};
+    (function() {
+      var s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = '//static.getclicky.com/js';
+      ( document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0] ).appendChild( s );
+    })();
+    </script>
+    <noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/66421111ns.gif" /></p></noscript>
+
+</html>
