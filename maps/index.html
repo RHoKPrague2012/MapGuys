@@ -35,7 +35,7 @@
             </div>
             <div id="detail-view" style="display:none;">
                 <div id="detail"></div>
-                <button id="hideDetail" onClick="HideDetail()">Back to all</button>
+                <button id="hideDetail" onClick="HideDetail()">Hide event detail</button>
             </div>
         </div>
                 
@@ -70,11 +70,13 @@
         $(function () {
             
             InitMap(map);   //sets up leaflet.js and loads our markers
-                    
+            setTimeout(function() {
+                mapSize = [$("#map").height(), $("#map").width()];
+            }, 300);
         });
 
         function loadAndShowDetail(id) {
-            mapSize = [$("#map").height(), $("#map").width()];
+            
 
             $.getJSON(id, function (data) {
                 currentDetail = data;
@@ -131,6 +133,9 @@
                     //window.history.popState();
                 }
             });
+
         }
+        
+
     </script>
 </html>
