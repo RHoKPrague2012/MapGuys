@@ -2,8 +2,11 @@ from app.aimap.models import *
 import datetime
 def load():
     import app
+    i = 0
     f = file("/home/sika/data2.csv", "r")
     for line in f.read().split("\n"):
+        i += 1
+        #if i == 10: break
         try:
             d = line.split(";")
             print d[1]

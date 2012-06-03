@@ -47,7 +47,11 @@ class Person(models.Model):
         return u"%s-%s-%i"%(self.ascii_issue_name, self.get_full_name(), self.pk).replace(" ", "-")
         
     def get_json(self):
-        return u'{"X":%f,"Y":%f,"text":"%s","detailJson":"%s","imgLink":"%s"}'%(self.lat, self.lon, self.issue_name, self.get_absolute_url(), self.photo)
+        if self.photo:
+            photo = self.photo
+        else:
+            photo = ""
+        return u'{"X":%f,"Y":%f,"text":"%s","detailJson":"%s","imgLink":"%s"}'%(self.lat, self.lon, self.issue_name, self.get_absolute_url(), photo)
 
     def get_detail_json(self):
         return '{"issue_date":"%s","pub_date":"%s","country":"%s","photo":"%s","description":"%s"}'%(self.issue_date, self.pub_date, self.country, self.photo, self.description)
