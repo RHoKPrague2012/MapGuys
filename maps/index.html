@@ -33,7 +33,7 @@
             <div class="panel-2col-stacked-1sidebar clear-block panel-display" >
                 <div id="map" style="height: 500px; width: auto"></div>
             </div>
-            <div id="detail-view" class="hidden">
+            <div id="detail-view" style="display:none;">
                 Pokus
                 <button id="hideDetail" onClick="HideDetail()">Back to all</button>
             </div>
@@ -64,7 +64,7 @@
     </div>
 </body>
     <script>
-        var map = new L.Map('map');
+        map = new L.Map('map');
         var mapSize;
         var currentDetail
         $(function () {
@@ -76,30 +76,32 @@
         function loadAndShowDetail(id) {
             mapSize = [$("#map").height(), $("#map").width()];
 
-            $.getJSON("fakedata_detail2.json", function (data) {
+            $.getJSON(id, function (data) {
                 currentDetail = data;
-                map.clearLayers();
-                DisplayMarkers([detail.marker], map);
-                var location = new L.LatLng(detail.marker.X, detail.marker.Y); // geographical point (longitude and latitude)
-                map.setView(location, 10);
-                $("#detail-view").toggle();
+                map.removeLayer(allMarkers);
+                DisplayMarkers([data.marker], map);
+                var location = new L.LatLng(data.marker.X, data.marker.Y); // geographical point (longitude and latitude)
+                map.invalidateSize();
+                map.setView(location, 4);
+                $("#detail-view").show();
             });
 
             $("#map").animate({ width: "370px" }, { duration: 350, queue: false });
 
             $("#map").animate({ height: "400px" }, { duration: 350, queue: false });
-
+            
             
             
         }
 
         function HideDetail() {
-            map.clearLayers();
-            $("#detail-view").toggle();
-            DisplayMarkers(allMarkers, map);
+
+            $("#detail-view").hide();
+            map.addLayer(allMarkers);
             $("#map").animate({ width: mapSize[0] }, { duration: 350, queue: false });
             
             $("#map").animate({ height: mapSize[1] }, { duration: 350, queue: false });
+            map.invalidateSize();
         }
     </script>
 </html>

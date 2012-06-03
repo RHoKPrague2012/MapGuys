@@ -1,4 +1,4 @@
-﻿var allMarkers;
+﻿allMarkers = {};
 
 function InitMap(map) {
 
@@ -53,24 +53,28 @@ function InitMap(map) {
     };
 
     $.getJSON('fakedata.json', function (data) {        //loads and displays markers
-        allMarkers = data;
-        DisplayMarkers(allMarkers, map);
+        allMarkers = DisplayMarkers(data, map);
     });
 }
 
 function DisplayMarkers(markers, map) {
+    var issuesLayer = new L.LayerGroup();
     var popup
     $.each(markers, function (index, value) {
         //console.log(index + ': ' + value);
         var markerLocation = new L.LatLng(value.X, value.Y);
         var marker = new L.Marker(markerLocation);
-        map.addLayer(marker);
+        
+        issuesLayer.addLayer(marker);
+
         var concatenated = "<b>" + value.text + '</b><br /><button id="' + value.detailJson + '" onClick="loadAndShowDetail(this.id)">See detail</button>';
         if (value.imgLink !== "") {     //adding an image if there is a link text
             concatenated = concatenated + '<br /><img src="' + value.imgLink + '" />';
         }
         popup = marker.bindPopup(concatenated);
     });
+    map.addLayer(issuesLayer);
     popup.openPopup();
+    return issuesLayer;
     
 }
