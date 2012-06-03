@@ -1,4 +1,5 @@
-﻿
+﻿var allMarkers;
+
 function InitMap(map) {
 
     var cloudmade = new L.TileLayer('http://{s}.tile.cloudmade.com/5c84c84721ef42c88f678b3686b02e92/997/256/{z}/{x}/{y}.png', {
@@ -50,7 +51,11 @@ function InitMap(map) {
             );
 
     };
-    
+
+    $.getJSON('fakedata.json', function (data) {        //loads and displays markers
+        allMarkers = data;
+        DisplayMarkers(allMarkers, map);
+    });
 }
 
 function DisplayMarkers(markers, map) {

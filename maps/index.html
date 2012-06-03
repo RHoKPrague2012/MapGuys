@@ -34,8 +34,8 @@
                 <div id="map" style="height: 500px; width: auto"></div>
             </div>
             <div id="detail-view" class="hidden">
-
-
+                Pokus
+                <button id="hideDetail" onClick="HideDetail()">Back to all</button>
             </div>
         </div>
                 
@@ -65,29 +65,41 @@
 </body>
     <script>
         var map = new L.Map('map');
-        function loadAndShowDetail(id) {
-
-            $("#map").animate({ width: "370px" }, { duration: 250, queue: false });
-
-            $("#map").animate({ height: "400px" }, { duration: 250, queue: false });
-
-            $.getJSON('fakedata_detail.json', function (detail) {
-                DisplayMarkers(data, map);
-            });
-            map.setView(new L.LatLng(50, 40), 11);    //TODO: exchange (50,40) with the real coordinates
-        }
+        var mapSize;
+        var currentDetail
         $(function () {
             
-            InitMap(map);
-            
-           
-            $.getJSON('fakedata.json', function (data) {
-                DisplayMarkers(data, map);
-            });
-        
-            
+            InitMap(map);   //sets up leaflet.js and loads our markers
+                    
         });
 
-       
+        function loadAndShowDetail(id) {
+            mapSize = [$("#map").height(), $("#map").width()];
+
+            $.getJSON("fakedata_detail2.json", function (data) {
+                currentDetail = data;
+                map.clearLayers();
+                DisplayMarkers([detail.marker], map);
+                var location = new L.LatLng(detail.marker.X, detail.marker.Y); // geographical point (longitude and latitude)
+                map.setView(location, 10);
+                $("#detail-view").toggle();
+            });
+
+            $("#map").animate({ width: "370px" }, { duration: 350, queue: false });
+
+            $("#map").animate({ height: "400px" }, { duration: 350, queue: false });
+
+            
+            
+        }
+
+        function HideDetail() {
+            map.clearLayers();
+            $("#detail-view").toggle();
+            DisplayMarkers(allMarkers, map);
+            $("#map").animate({ width: mapSize[0] }, { duration: 350, queue: false });
+            
+            $("#map").animate({ height: mapSize[1] }, { duration: 350, queue: false });
+        }
     </script>
 </html>
