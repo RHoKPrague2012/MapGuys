@@ -19,3 +19,7 @@ def person_all():
 def person_all_view(request):
     return HttpResponse(person_all())
 
+    
+def person_detail_view(request, pk):
+    return HttpResponse(Person.objects.get(pk=pk).get_detail_json())
+

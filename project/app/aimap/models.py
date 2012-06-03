@@ -57,7 +57,7 @@ class Person(models.Model):
         return u"/%i"%self.pk
     
     def __unicode__(self):
-        return u"%s %s" % (self.last_name, self.first_name)
+        return u"%s %s" % (self.first_name, self.last_name)
 
     def get_full_name(self):
         return unicode(self)
@@ -67,6 +67,9 @@ class Person(models.Model):
         
     def get_json(self):
         return u'{"X":%f,"Y":%f,"text":"%s","detailJson":"%s","imgLink":"%s"}'%(self.lat, self.lon, self.issue_name, self.get_absolute_url(), self.photo)
+
+    def get_detail_json(self):
+        return '{"full_name":"%s","sex":"%s","issue_date":"%s","pub_date":"%s","birth":"%s","country":"%s","photo":"%s","description":"%s"}'%(self.get_full_name(), self.sex, self.issue_date, self.pub_date, self.birth, self.country, self.photo, self.description)
 
     def save(self):
         self.ascii_issue_name = unicode2ascii(self.issue_name)
