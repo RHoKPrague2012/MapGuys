@@ -43,7 +43,7 @@
                 concatenated = concatenated + "</div>"
                 $('#detail').replaceWith(concatenated);
                 $('#map').css("float","left");
-                history.pushState(data, data.full_name, data.pk);
+                history.pushState(data, data.full_name, "detail/"+data.pk);
             });
 
             $("#map").animate({ width: "450px" }, { duration: 350, queue: false });
