@@ -10,14 +10,16 @@
         var mapSize;
         var currentDetail
         $(function () {
-            if (location.href.indexOf("detail") != -1){
-                var id = location.href.split("/").pop();
-                loadAndShowDetail("/detail/"+id)
-            }
             InitMap(map);   //sets up leaflet.js and loads our markers
             setTimeout(function() {
                 mapSize = [$("#map").height(), $("#map").width()];
-            }, 300);
+                //load the detail if client has a detail URL
+                if (location.href.indexOf("detail") != -1){
+		                var id = location.href.split("/").pop();
+		                loadAndShowDetail("/detail/"+id)
+		            }
+            }, 100);
+            
         });
 
         function loadAndShowDetail(id) {
