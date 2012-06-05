@@ -58,14 +58,18 @@ function InitMap(map) {
 }
 
 function DisplayMarkers(markers, map) {
-    var issuesLayer = new L.LayerGroup();
+    var categories = []
+    var issueMarkers = {};
     var popup
     $.each(markers, function (index, value) {
         //console.log(index + ': ' + value);
         var markerLocation = new L.LatLng(value.X, value.Y);
         var marker = new L.Marker(markerLocation);
         
-        issuesLayer.addLayer(marker);
+        if (issueMarkers[value.category] === null) {
+            issueMarkers[value.category] = new L.LayerGroup();
+        }
+        issueMarkers[value.category].addLayer(marker);
 
         var concatenated = "<b>" + value.text + '</b><br /><button id="' + value.detailJson + '" onClick="loadAndShowDetail(this.id)">See detail</button>';
         if (value.imgLink !== "") {     //adding an image if there is a link text
@@ -73,8 +77,13 @@ function DisplayMarkers(markers, map) {
         }
         popup = marker.bindPopup(concatenated);
     });
-    map.addLayer(issuesLayer);
-    popup.openPopup();
-    return issuesLayer;
+    $.each(issueMarkers, function (layerName, layer) {
+        map.addLayer(layer);
+        console.log("Added a layer named:" + layerName);
+    });
+    var layersControl = new L.Control.Layers(issueMarkers);
+    map.addControl(layersControl);
+    popup.openPopup();  //last added pop up opens, this may be strange but it is requested feature
+    return issueMarkers;
     
 }
