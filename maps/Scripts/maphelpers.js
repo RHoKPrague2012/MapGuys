@@ -66,7 +66,7 @@ function DisplayMarkers(markers, map) {
         var markerLocation = new L.LatLng(value.X, value.Y);
         var marker = new L.Marker(markerLocation);
         
-        if (issueMarkers[value.category] === null) {
+        if (typeof issueMarkers[value.category] === "undefined") {
             issueMarkers[value.category] = new L.LayerGroup();
         }
         issueMarkers[value.category].addLayer(marker);
@@ -81,7 +81,7 @@ function DisplayMarkers(markers, map) {
         map.addLayer(layer);
         console.log("Added a layer named:" + layerName);
     });
-    var layersControl = new L.Control.Layers(issueMarkers);
+    var layersControl = new L.Control.Layers(null, issueMarkers);       //first parameter will get radio buttons in the "layers" tab, which we don't want, we want checkboxes
     map.addControl(layersControl);
     popup.openPopup();  //last added pop up opens, this may be strange but it is requested feature
     return issueMarkers;

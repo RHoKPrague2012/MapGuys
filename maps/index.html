@@ -81,8 +81,7 @@
         });
 
         function loadAndShowDetail(id) {
-
-
+            $('#detail').replaceWith('<div id="detail"></div>');        //we don't have an animated "loading" spinner yet, but at least we can hide the previous detail
             $.getJSON(id, function (data) {
                 currentDetail = data;
                 //map.removeLayer(allMarkers);
@@ -117,8 +116,6 @@
                     map.invalidateSize();
                 }
             });
-
-
 
         }
 
