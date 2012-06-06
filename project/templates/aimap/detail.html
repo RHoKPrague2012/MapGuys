@@ -23,7 +23,7 @@
         });
 
         function loadAndShowDetail(id) {
-            
+            $('#detail').replaceWith('<div id="detail"></div>');
 
             $.getJSON(id, function (data) {
                 currentDetail = data;

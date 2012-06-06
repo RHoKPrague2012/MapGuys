@@ -58,7 +58,6 @@ function InitMap(map) {
 }
 
 function DisplayMarkers(markers, map) {
-    var categories = []
     var issueMarkers = {};
     var popup
     $.each(markers, function (index, value) {
