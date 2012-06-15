@@ -1,0 +1,76 @@
+from django.db import models
+
+from django.contrib.auth.models import User
+#from django.contrib.gis.db import models
+from django.core.validators import RegexValidator
+from django.utils.translation import ugettext_lazy as _
+from aimap.util import unicode2ascii
+
+class Marker(models.Model):
+    marker_name = models.CharField(max_length=255) 
+    img = models.ImageField(upload_to="markers")
+
+class Category(models.Model):
+    issue_type = models.CharField(max_length=255)
+    default_marker = models.ForeignKey(Marker, blank=True, null=True)
+    
+    class Meta:
+        verbose_name = _('Type of issue')
+        verbose_name_plural = _('Type of issues')
+
+class Issue(models.Model):
+    category = models.ForeignKey(Category, blank=True, null=True)
+    marker = models.ForeignKey(Marker, blank=True, null=True)
+    issue_name = models.CharField(max_length=255)
+    ascii_issue_name = models.CharField(null=True, blank=True, max_length=255)
+    pub_date = models.DateField(auto_now_add=True)
+    issue_date = models.DateField()
+    country = models.CharField(max_length=255, null=True, blank=True)
+    ai_library = models.URLField(null=True, blank=True, max_length=255)
+    photo = models.URLField(null=True, blank=True, max_length=255)
+    description = models.TextField(null=True, blank=True)
+    
+    map_picker = models.CharField(max_length=255, null=True, blank=True)
+    lat = models.FloatField()
+    lon = models.FloatField()
+
+    def admin_map_picker(self):
+        return "<a href='http://google.com'>HELLO</a>"
+
+    def get_absolute_url(self):
+        return u"/%i"%self.pk
+    
+    def __unicode__(self):
+        return u"%s" % (self.issue_name)
+
+    def get_full_name(self):
+        return unicode(self)
+    
+    def get_url_key(self):
+        return u"%s-%s-%i"%(self.ascii_issue_name, self.get_full_name(), self.pk).replace(" ", "-")
+
+        
+    def get_json(self):
+        if self.photo:
+            photo = self.photo
+        else:
+            photo = ""
+        return u'{"X":%f,"Y":%f,"text":"%s","detailJson":"%s","imgLink":"%s"}'%(self.lat, self.lon, self.issue_name, u"/json/person_%i.json"%self.pk, photo)
+
+    def get_detail_json(self):
+        if self.photo:
+            photo = self.photo
+        else:
+            photo = ""
+        return '{"marker":%s, "pk":"%i", "issue_name":"%s", "issue_date":"%s","pub_date":"%s","country":"%s","photo":"%s","description":"%s"}'%(self.get_json(), self.pk, self.issue_name, self.issue_date, self.pub_date, self.country, photo, self.description)
+
+    def save(self):
+        #self.ascii_issue_name = unicode2ascii(self.issue_name)
+        super(Issue, self).save()
+
+
+    class Meta:
+        verbose_name = _('Issue')
+        verbose_name_plural = _('Issues')
+
+

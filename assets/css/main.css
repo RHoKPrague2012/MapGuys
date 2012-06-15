@@ -1,0 +1,36 @@
+body {
+font-family: Arial;
+font-size: 1.1em;
+background-color: #000;
+}
+
+#main-container{
+width: 1000px;
+margin: 20px auto;
+}
+
+#header {
+padding-top:10px;
+background-image:url('/static/img/header-logo-en.png');
+background-repeat:no-repeat;
+background-color: #ffff00;
+height: 90px;
+margin-bottom: 10px;
+overflow: auto;
+}
+
+#content {
+overflow: auto;
+background-color: #fff;
+}
+
+#right-head {
+float:right;
+}
+
+
+#footer {
+background-color: #ffff00;
+margin-top: 10px;
+text-align: center;
+}

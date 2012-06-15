@@ -1,0 +1,90 @@
+{%extends "aimap/base.html" %}
+{%block content%}
+<div id="map" style="height: 500px; width: auto; "></div>
+<div id="detail-view" style="display:none; float:right; width:500px">
+                <button id="hideDetail" onClick="HideDetail()">Hide event detail</button>
+                <div id="detail"></div>
+            </div>
+            <script>
+        map = new L.Map('map');
+        var mapSize;
+        var currentDetail
+        $(function () {
+            InitMap(map);   //sets up leaflet.js and loads our markers
+            setTimeout(function() {
+                mapSize = [$("#map").height(), $("#map").width()];
+                //load the detail if client has a detail URL
+                if (location.href.indexOf("detail") != -1){
+		                var id = location.href.split("/").pop();
+		                loadAndShowDetail("/detail/"+id)
+		            }
+            }, 100);
+            
+        });
+
+        function loadAndShowDetail(id) {
+            $('#detail').replaceWith('<div id="detail"></div>');
+
+            $.getJSON(id, function (data) {
+                currentDetail = data;
+                //map.removeLayer(allMarkers);
+                //DisplayMarkers([data.marker], map);
+                var location = new L.LatLng(data.marker.X, data.marker.Y); // geographical point (longitude and latitude)
+                
+                map.setView(location, 8);
+                $("#detail-view").show();
+                var concatenated =
+                    '<div id="detail" style="float:right;"><h1>' + data.issue_name + '</h2><br />' +
+                    '<h3> Date of the event: ' + data.issue_date + ' </h3> <br />'+
+                    '<h5> Added: ' +             data.birth + '</h5> <br />'+
+                    '<h2> Country: ' +           data.country + '</h3> <br />'+
+                    '<p>' +                      data.description + '</p> <br />';
+
+
+                    
+                if (data.photo !== "") {     //adding an image if there is a link text
+                    concatenated = concatenated + '<img src="' + data.photo + '" />';
+                }
+                concatenated = concatenated + "</div>"
+                $('#detail').replaceWith(concatenated);
+                $('#map').css("float","left");
+                history.pushState(data, data.full_name, data.pk);
+            });
+
+            $("#map").animate({ width: "450px" }, { duration: 350, queue: false });
+
+            $("#map").animate({ height: "400px" }, {
+                duration: 350, queue: false, complete: function () {
+                    console.log("Invalidating map size");
+                    map.invalidateSize();
+                }
+            });
+            
+            
+            
+        }
+
+        function HideDetail() {
+            //map.removeLayer(currentDetail.marker);
+            //map.addLayer(allMarkers);
+            $("#detail-view").hide();
+
+            $("#map").animate({ height: mapSize[0] }, { duration: 350, queue: false });
+            
+            $("#map").animate({ width: mapSize[1] }, {
+                duration: 350, queue: false, complete: function () {
+                    console.log("Invalidating map size");
+                    map.invalidateSize();
+                    map.setZoom(3);
+                    $('#detail').replaceWith('<div id="detail"></div>');
+                    $('#map').css("float","none");
+                    window.history.back();
+                    //window.history.popState();
+                }
+            });
+
+        }
+        
+
+    </script>
+{%endblock%}
