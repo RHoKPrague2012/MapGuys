@@ -19,7 +19,7 @@ def load():
             a = d[6].split(" ")
             dd = "%s-%s-%s"%(a[2], time.strptime(a[1], "%b").tm_mon, a[0])
             print d[1]
-            obj = Person(issue_name=d[3],
+            obj = Issue(issue_name=d[3],
                          description=d[4],
                          country=d[0],
                          ai_library=d[5],
@@ -28,7 +28,7 @@ def load():
                          issue_date=dd
                          )
             obj.save()
-        except :#ValueError:
+        except ValueError:
             pass
                         
 def lw(request):
@@ -36,6 +36,6 @@ def lw(request):
     return 0
     
 def d(request):
-    for x in Person.objects.all():
+    for x in Issue.objects.all():
         x.delete()
     return 0

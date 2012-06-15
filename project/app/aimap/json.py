@@ -7,11 +7,11 @@ from django.forms.models import modelformset_factory
 from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.cache import never_cache, cache_page
 
-from aimap.models import Person
+from aimap.models import Issue
 
 def person_all():
     objs = []
-    for obj in Person.objects.all():
+    for obj in Issue.objects.all():
         objs.append(obj.get_json())
     
     return u"[%s]"%(",".join(objs))
@@ -21,5 +21,5 @@ def person_all_view(request):
 
     
 def person_detail_view(request, pk):
-    return HttpResponse(Person.objects.get(pk=pk).get_detail_json())
+    return HttpResponse(Issue.objects.get(pk=pk).get_detail_json())
 

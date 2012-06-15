@@ -6,20 +6,23 @@ from django.core.validators import RegexValidator
 from django.utils.translation import ugettext_lazy as _
 from aimap.util import unicode2ascii
 
+class Marker(models.Model):
+    marker_name = models.CharField(max_length=255) 
+    img = models.ImageField(upload_to="markers")
 
-class Person(models.Model):
-    """A person, a prisoner."""
+class Category(models.Model):
+    issue_type = models.CharField(max_length=255)
+    default_marker = models.ForeignKey(Marker, blank=True, null=True)
+    
+    class Meta:
+        verbose_name = _('Type of issue')
+        verbose_name_plural = _('Type of issues')
 
-    SEX_MALE = 1
-    SEX_FEMALE = 2
-
-    SEX_CHOICES = (
-        (SEX_MALE, _('male')),
-        (SEX_FEMALE, _('female')),
-        )
-
+class Issue(models.Model):
+    category = models.ForeignKey(Category, blank=True, null=True)
+    marker = models.ForeignKey(Marker, blank=True, null=True)
     issue_name = models.CharField(max_length=255)
-    ascii_issue_name = models.CharField(blank=True, max_length=255)
+    ascii_issue_name = models.CharField(null=True, blank=True, max_length=255)
     pub_date = models.DateField(auto_now_add=True)
     issue_date = models.DateField()
     country = models.CharField(max_length=255, null=True, blank=True)
@@ -63,11 +66,11 @@ class Person(models.Model):
 
     def save(self):
         #self.ascii_issue_name = unicode2ascii(self.issue_name)
-        super(Person, self).save()
+        super(Issue, self).save()
 
 
     class Meta:
-        verbose_name = _('Person')
-        verbose_name_plural = _('Persons')
+        verbose_name = _('Issue')
+        verbose_name_plural = _('Issues')
 
 

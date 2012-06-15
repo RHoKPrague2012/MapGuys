@@ -10,15 +10,13 @@ class AdminMapPickerWidget(AdminTextInputWidget):
         return mark_safe(u'<link rel="stylesheet" type="text/css" href="/static/css/leaflet.css" /><div id="map" style="height: 300px; width: 300px"></div>')
 
 
-class PersonAdminForm(forms.ModelForm):
+class IssueAdminForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
-        super(PersonAdminForm, self).__init__(*args, **kwargs)
+        super(IssueAdminForm, self).__init__(*args, **kwargs)
         self.fields['map_picker'].widget = AdminMapPickerWidget()
 
-class PersonAdmin(admin.ModelAdmin):
-    #exclude = ("ascii_first_name", "ascii_last_name", "ascii_issue_name", )
-    #readonly_fields = ('map_picker', )
-    form = PersonAdminForm
+class IssueAdmin(admin.ModelAdmin):
+    form = IssueAdminForm
     exclude =  ("ascii_issue_name", )
 
     class Media:
@@ -29,8 +27,9 @@ class PersonAdmin(admin.ModelAdmin):
               "/static/js/admin_map_picker.js", ]
         #css = ["/static/css/leaflet.css", ]
       
-
-admin.site.register(Person, PersonAdmin)
+admin.site.register(Issue, IssueAdmin)
+admin.site.register(Marker)
+admin.site.register(Category)
 
 		 
 
